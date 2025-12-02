@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна 1</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<h1>Лабораторна №1 — Основи HTML. Форми</h1>
+
+<form action="https://webhook.site/ВАШ_ЛІНК" method="post">
+
+    <label>Ім'я:</label><br>
+    <input type="text" name="firstname" required><br><br>
+
+    <label>Прізвище:</label><br>
+    <input type="text" name="lastname" required><br><br>
+
+    <label>Email:</label><br>
+    <input type="email" name="email" required><br><br>
+
+    <label>Пароль:</label><br>
+    <input type="password" name="password" required><br><br>
+
+    <label>Підтвердження паролю:</label><br>
+    <input type="password" name="confirm_password" required><br><br>
+
+    <label>Дата народження:</label><br>
+    <input type="date" name="birthdate"><br><br>
+
+    <label>Стать:</label><br>
+    <select name="gender">
+        <option value="m">Чоловіча</option>
+        <option value="f">Жіноча</option>
+        <option value="o">Інша</option>
+    </select><br><br>
+
+    <input type="submit" value="Надіслати">
+</form>
+
+</body>
+</html>
