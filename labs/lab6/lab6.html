@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pokemon Sprite Animation — Лабораторна №6</title>
+
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --sky-top:#020617;
+      --sky-bottom:#0f172a;
+      --ground:#064e3b;
+      --accent:#facc15;
+      --card:#020617e6;
+      --border:rgba(148,163,184,0.55);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:"Poppins",system-ui, -apple-system, "Segoe UI", sans-serif;
+      background:radial-gradient(circle at 10% 0,#1e293b,#020617 45%,#000 100%);
+      color:#e5e7eb;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      overflow:hidden;
+    }
+
+    .scene-frame{
+      width:100%;
+      max-width:980px;
+      aspect-ratio:16/9;
+      border-radius:18px;
+      padding:12px 14px 14px;
+      border:1px solid var(--border);
+      background:radial-gradient(circle at 0 0,#1e293b,#020617 55%,#000 100%);
+      box-shadow:0 16px 40px rgba(15,23,42,0.9);
+      display:grid;
+      grid-template-rows:auto 1fr;
+      gap:10px;
+    }
+
+    .scene-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-size:13px;
+    }
+    .title{
+      display:flex;flex-direction:column;gap:3px;
+    }
+    .title-main{
+      font-family:"Press Start 2P", system-ui;
+      font-size:12px;
+      letter-spacing:1px;
+      text-transform:uppercase;
+    }
+    .title-sub{font-size:11px;color:#9ca3af}
+
+    .badge{
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,0.6);
+      background:#020617b3;
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+    }
+
+    
+    .scene{
+      position:relative;
+      overflow:hidden;
+      border-radius:14px;
+      background:linear-gradient(to bottom,var(--sky-top),var(--sky-bottom));
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      isolation:isolate;
+    }
+
+    
+    .scene::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:conic-gradient(from 180deg, #0ea5e9, #1d4ed8, #a855f7, #0ea5e9);
+      mix-blend-mode:soft-light;
+      opacity:0.6;
+      animation: skyShift 16s linear infinite alternate;
+      z-index:-2;
+    }
+
+    @keyframes skyShift{
+      0%{transform:translateX(0) rotate(0deg)}
+      50%{transform:translateX(-8%) rotate(10deg)}
+      100%{transform:translateX(6%) rotate(-6deg)}
+    }
+
+    
+    .cloud{
+      position:absolute;
+      top:18%;
+      width:120px;height:50px;
+      background:radial-gradient(circle at 20% 30%,#ffffff,#e5e7eb 40%,#9ca3af 100%);
+      border-radius:999px;
+      filter:blur(0.3px);
+      opacity:0.9;
+      animation: cloudDrift 32s linear infinite;
+    }
+    .cloud::before,
+    .cloud::after{
+      content:"";
+      position:absolute;
+      background:inherit;
+      border-radius:inherit;
+    }
+    .cloud::before{width:70%;height:75%;left:-10%;top:-18%;}
+    .cloud::after{width:60%;height:65%;right:-10%;top:-10%;}
+
+    .cloud.c1{left:-20%;animation-delay:0s;top:20%}
+    .cloud.c2{left:40%;animation-delay:-8s;top:15%;transform:scale(.9)}
+    .cloud.c3{left:75%;animation-delay:-16s;top:26%;transform:scale(1.1)}
+
+    @keyframes cloudDrift{
+      0%{transform:translateX(0) scale(1)}
+      100%{transform:translateX(160%) scale(1)}
+    }
+
+    
+    .mountains{
+      position:absolute;
+      inset:auto -20% 32%;
+      height:40%;
+      background:radial-gradient(circle at 0 100%,#1e293b 0,#020617 55%,transparent 60%),
+                  radial-gradient(circle at 40% 110%,#111827 0,#020617 58%,transparent 62%),
+                  radial-gradient(circle at 80% 110%,#111827 0,#020617 58%,transparent 62%);
+      opacity:0.9;
+      animation: mountainsParallax 22s linear infinite;
+    }
+    @keyframes mountainsParallax{
+      0%{transform:translateX(0)}
+      100%{transform:translateX(-8%)}
+    }
+
+    
+    .ground{
+      position:absolute;
+      left:-10%;right:-10%;bottom:0;
+      height:32%;
+      background:
+        linear-gradient(to top,#022c22 0,#064e3b 40%,transparent 60%),
+        repeating-linear-gradient(90deg,#022c22 0,#022c22 6px,#064e3b 6px,#064e3b 12px);
+      box-shadow:0 -18px 30px rgba(15,23,42,0.9) inset;
+      border-radius:40% 40% 0 0 / 50% 50% 0 0;
+      animation: groundSlide 12s linear infinite;
+    }
+
+    @keyframes groundSlide{
+      0%{background-position:0 0, 0 0}
+      100%{background-position:0 0, -120px 0}
+    }
+
+    
+    .path{
+      position:absolute;left:-20%;right:-20%;bottom:8%;height:10%;
+      background:
+        radial-gradient(circle at 50% -40%,rgba(15,23,42,0.6),transparent 60%),
+        repeating-linear-gradient(90deg,#052e16 0,#052e16 12px,#14532d 12px,#14532d 24px);
+      border-radius:50%;
+      filter:drop-shadow(0 10px 20px rgba(0,0,0,0.9));
+      animation:pathMove 10s linear infinite;
+    }
+    @keyframes pathMove{
+      0%{background-position:0 0,0 0}
+      100%{background-position:0 0,-160px 0}
+    }
+
+    
+    .pokemon-wrapper{
+      position:relative;
+      z-index:5;
+      transform-origin:center bottom;
+      animation:pokemonRunAcross 12s linear infinite;
+    }
+
+    
+    .pokemon{
+      width:96px;
+      height:96px;
+      image-rendering:pixelated;
+      background-image:url("https://img.pokemondb.net/sprites/black-white/anim/normal/pikachu.gif"); 
+      background-repeat:no-repeat;
+      background-position:0 0;
+      
+      
+
+      
+      animation:
+        pokemonStep 0.6s steps(4) infinite,
+        pokemonBob 0.6s ease-in-out infinite;
+    }
+
+    @keyframes pokemonStep{
+      0%{background-position:0 0}
+      100%{background-position:-384px 0} 
+    }
+
+    @keyframes pokemonBob{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-6px)}
+    }
+
+    
+    @keyframes pokemonRunAcross{
+      0%{transform:translateX(-140%) scale(1) }
+      50%{transform:translateX(0) scale(1.04)}
+      100%{transform:translateX(140%) scale(1)}
+    }
+
+    
+    .info-card{
+      position:absolute;
+      left:16px;bottom:16px;
+      padding:8px 10px;
+      border-radius:10px;
+      background:var(--card);
+      border:1px solid var(--border);
+      font-size:11px;
+      max-width:220px;
+      backdrop-filter:blur(10px);
+    }
+    .info-card strong{color:var(--accent)}
+
+    
+    .controls{
+      display:flex;gap:8px;align-items:center;font-size:11px;color:#9ca3af;
+    }
+    .controls button{
+      padding:4px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#020617b3;
+      color:#e5e7eb;
+      font-size:11px;
+      cursor:pointer;
+    }
+    .controls button:hover{background:#020617}
+
+    .paused .pokemon,
+    .paused .pokemon-wrapper,
+    .paused .cloud,
+    .paused .ground,
+    .paused .path,
+    .paused .mountains,
+    .paused::before{
+      animation-play-state:paused !important;
+    }
+
+    @media (max-width:720px){
+      .scene-frame{aspect-ratio:9/16;max-width:420px;}
+      .info-card{font-size:10px;max-width:180px}
+      .title-main{font-size:10px}
+    }
+  </style>
+</head>
+<body>
+  <div class="scene-frame">
+    <div class="scene-header">
+      <div class="title">
+        <div class="title-main">Pokemon Sprite Lab</div>
+        <div class="title-sub">Лабораторна робота №6 · CSS спрайти + фон</div>
+      </div>
+      <div class="controls">
+        <span>Анімація:</span>
+        <button id="toggle">Пауза</button>
+      </div>
+      <div class="badge">CSS only animation</div>
+    </div>
+
+    <div class="scene" id="scene">
+      <div class="cloud c1"></div>
+      <div class="cloud c2"></div>
+      <div class="cloud c3"></div>
+
+      <div class="mountains"></div>
+      <div class="ground"></div>
+      <div class="path"></div>
+
+      <div class="pokemon-wrapper">
+        <div class="pokemon" aria-label="Pikachu sprite"></div>
+      </div>
+
+      <div class="info-card">
+        <div><strong>Спрайт покемона</strong>: анімація кроків через <code>background-position</code> + <code>steps()</code>.</div>
+        <div>Фон: рух хмар, паралакс гір та ковзаюча доріжка.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Невеликий JS лише для UX: пауза / відновлення анімації
+    const scene = document.getElementById('scene');
+    const btn = document.getElementById('toggle');
+    let isPaused = false;
+
+    btn.addEventListener('click', ()=>{
+      isPaused = !isPaused;
+      if(isPaused){
+        scene.classList.add('paused');
+        btn.textContent = 'Старт';
+      } else {
+        scene.classList.remove('paused');
+        btn.textContent = 'Пауза';
+      }
+    });
+  </script>
+</body>
+</html>
