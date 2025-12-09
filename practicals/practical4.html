@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fullsize Keyboard — Практична робота №4</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f1724;
+      --panel:#0b1220;
+      --key:#e6eef8;
+      --key-dark:#c7d9f0;
+      --accent:#3b82f6;
+      --shadow1: 0 6px 0 rgba(10,20,30,0.6);
+      --shadow2: 0 10px 20px rgba(2,6,23,0.8);
+      --key-radius:10px;
+      --gap:10px;
+      --key-font: 'Roboto Mono', monospace;
+      --label-font: 'Poppins', sans-serif;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--label-font);
+      background: linear-gradient(180deg, #071028 0%, #08121c 60%);
+      color:#e6eef8;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
+    }
+
+    .keyboard-wrap{
+      width:100%;
+      max-width:1300px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));
+      border-radius:16px;
+      padding:28px;
+      box-shadow: var(--shadow2);
+    }
+
+    .keyboard{
+      display:grid;
+      grid-template-columns: 1fr 280px;
+      gap:var(--gap);
+    }
+
+    .main-keys{
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03));
+      padding:18px;
+      border-radius:12px;
+      display:grid;
+      grid-template-rows: repeat(6, auto);
+      gap:var(--gap);
+    }
+
+    .row{display:grid; gap:var(--gap); grid-auto-flow:column; align-items:center}
+
+    .key{
+      background: linear-gradient(180deg, var(--key), var(--key-dark));
+      border-radius:var(--key-radius);
+      padding:12px 10px;
+      min-width:38px;
+      text-align:center;
+      font-family:var(--key-font);
+      font-weight:600;
+      color:#071026;
+      box-shadow: var(--shadow1);
+      user-select:none;
+      cursor:pointer;
+      transition: transform 0.06s linear, box-shadow 0.06s linear, background 0.12s ease;
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      font-size:14px;
+    }
+
+    .key.wide{min-width:86px; padding:12px 18px}
+    .key.extra-wide{min-width:160px}
+    .key.space{min-width:380px}
+    .key.num{min-width:46px}
+
+    .key.ctrl, .key.shift, .key.alt, .key.tab, .key.caps{
+      font-weight:700;
+      letter-spacing:0.6px;
+    }
+
+    .key.fn{background:transparent; color:var(--accent); box-shadow:none; border:1px solid rgba(255,255,255,0.04)}
+
+    .key:active,
+    .key.pressed{
+      transform: translateY(6px);
+      box-shadow: none;
+      background: linear-gradient(180deg, #dbeafc, #bcd7fb);
+    }
+
+    .key.toggled{
+      background: linear-gradient(180deg, var(--accent), #1f6fe8);
+      color:white;
+      box-shadow: 0 6px 0 rgba(10,30,80,0.6);
+    }
+
+    .key.disabled{
+      opacity:0.45; cursor:not-allowed; filter:grayscale(0.2);
+    }
+
+    .sub{
+      font-size:11px; color:rgba(7,16,38,0.8); font-weight:500; letter-spacing:0.6px
+    }
+
+    .row.row1{grid-template-columns: 64px repeat(12, 1fr) 64px}
+    .row.row2{grid-template-columns: 64px repeat(14, 1fr) 96px}
+    .row.row3{grid-template-columns: 96px repeat(13, 1fr) 96px}
+    .row.row4{grid-template-columns: 110px repeat(11, 1fr) 110px}
+    .row.row5{grid-template-columns: 140px repeat(9, 1fr) 140px}
+    .row.row6{grid-template-columns: 90px 90px 90px 1fr 90px 90px}
+
+    .numpad{
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.03));
+      padding:18px; border-radius:12px; display:grid; gap:var(--gap);
+      grid-template-columns: repeat(3, 1fr);
+      align-items:center;
+    }
+
+    .numpad .key{min-height:48px}
+
+    .arrow-cluster{display:grid; grid-template-columns: repeat(3, 1fr); gap:var(--gap); align-items:center}
+
+    @media (max-width:1100px){
+      .keyboard{grid-template-columns:1fr}
+      .key.space{min-width:100%}
+    }
+  </style>
+</head>
+<body>
+  <div class="keyboard-wrap">
+    <h2 style="margin:0 0 12px 0; font-family:var(--label-font); font-weight:600">Fullsize keyboard — Практична робота №4</h2>
+    <div class="keyboard">
+      <div class="main-keys">
+        <div class="row row1">
+          <div class="key esc">ESC</div>
+          <div class="key">F1</div><div class="key">F2</div><div class="key">F3</div><div class="key">F4</div>
+          <div class="key">F5</div><div class="key">F6</div><div class="key">F7</div><div class="key">F8</div>
+          <div class="key">F9</div><div class="key">F10</div><div class="key">F11</div><div class="key">F12</div>
+          <div class="key wide">Print</div>
+        </div>
+
+        <div class="row row2">
+          <div class="key wide">~<div class="sub">`</div></div>
+          <div class="key">1</div><div class="key">2</div><div class="key">3</div><div class="key">4</div>
+          <div class="key">5</div><div class="key">6</div><div class="key">7</div><div class="key">8</div>
+          <div class="key">9</div><div class="key">0</div><div class="key">-</div><div class="key">=</div>
+          <div class="key wide">Backspace</div>
+        </div>
+
+        <div class="row row3">
+          <div class="key wide">Tab</div>
+          <div class="key">Q</div><div class="key">W</div><div class="key">E</div><div class="key">R</div>
+          <div class="key">T</div><div class="key">Y</div><div class="key">U</div><div class="key">I</div>
+          <div class="key">O</div><div class="key">P</div><div class="key">[</div><div class="key">]</div>
+          <div class="key wide">\</div>
+        </div>
+
+        <div class="row row4">
+          <div class="key caps">Caps</div>
+          <div class="key">A</div><div class="key">S</div><div class="key">D</div><div class="key">F</div>
+          <div class="key">G</div><div class="key">H</div><div class="key">J</div><div class="key">K</div>
+          <div class="key">L</div><div class="key">;</div><div class="key">'</div>
+          <div class="key wide">Enter</div>
+        </div>
+
+        <div class="row row5">
+          <div class="key shift">Shift</div>
+          <div class="key">Z</div><div class="key">X</div><div class="key">C</div><div class="key">V</div>
+          <div class="key">B</div><div class="key">N</div><div class="key">M</div><div class="key">,</div>
+          <div class="key">.</div><div class="key">/</div>
+          <div class="key shift wide">Shift</div>
+        </div>
+
+        <div class="row row6">
+          <div class="key ctrl">Ctrl</div>
+          <div class="key win">Win</div>
+          <div class="key alt">Alt</div>
+          <div class="key space">&nbsp;</div>
+          <div class="key alt">AltGr</div>
+          <div class="key menu">Menu</div>
+        </div>
+
+        <div style="margin-top:8px; display:flex; justify-content:flex-end">
+          <div class="arrow-cluster" style="width:260px;">
+            <div></div>
+            <div class="key small">↑</div>
+            <div></div>
+            <div class="key small">←</div>
+            <div class="key small">↓</div>
+            <div class="key small">→</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="numpad">
+        <div class="key num">Num</div>
+        <div class="key num">/</div>
+        <div class="key num">*</div>
+        <div class="key num">7</div>
+        <div class="key num">8</div>
+        <div class="key num">9</div>
+        <div class="key num">4</div>
+        <div class="key num">5</div>
+        <div class="key num">6</div>
+        <div class="key num">1</div>
+        <div class="key num">2</div>
+        <div class="key num">3</div>
+        <div class="key num extra-wide">0</div>
+        <div class="key num">.</div>
+        <div class="key num">Enter</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    
+    document.querySelectorAll('.key').forEach(k=>{
+      k.addEventListener('mousedown',()=>{
+        k.classList.add('pressed');
+      });
+      k.addEventListener('mouseup',()=>{
+        k.classList.remove('pressed');
+      });
+      k.addEventListener('mouseleave',()=>{
+        k.classList.remove('pressed');
+      });
+
+      if(k.classList.contains('caps')){
+        k.addEventListener('click',()=>{
+          k.classList.toggle('toggled');
+        });
+      }
+      if(k.textContent.trim()==='Num'){
+        k.addEventListener('click',()=>{
+          k.classList.toggle('toggled');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
