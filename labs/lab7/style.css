@@ -1,0 +1,102 @@
+margin-bottom: 10px;
+}
+
+
+&__grid {
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+column-gap: 14px;
+}
+
+
+&__item {
+border-radius: 16px;
+padding: 12px 14px;
+border: 1px solid $color-border;
+background: #020617e0;
+
+
+&_type-soft {
+background: rgba(15, 23, 42, 0.86);
+}
+}
+
+
+&__label {
+font-size: 11px;
+text-transform: uppercase;
+letter-spacing: 0.16em;
+color: $color-muted;
+}
+
+
+&__text {
+margin-top: 6px;
+font-size: 13px;
+}
+}
+
+
+// Блок footer
+.footer {
+&__text {
+text-align: center;
+font-size: 11px;
+color: $color-muted;
+margin-top: 8px;
+}
+}
+
+
+// Простенька адаптивність
+@media (max-width: 880px) {
+.card {
+grid-template-columns: minmax(0, 1fr);
+row-gap: 10px;
+}
+
+
+.card__tree {
+justify-self: center;
+}
+
+
+.extra {
+grid-template-columns: minmax(0, 1fr);
+row-gap: 10px;
+}
+
+
+.plans__grid {
+grid-template-columns: minmax(0, 1fr);
+row-gap: 10px;
+}
+
+
+.header {
+flex-wrap: wrap;
+row-gap: 8px;
+}
+}
+
+
+@media (max-width: 600px) {
+.page {
+padding-inline: 10px;
+}
+
+
+.header__nav {
+width: 100%;
+}
+
+
+.nav {
+justify-content: center;
+}
+
+
+.card__title {
+font-size: 26px;
+}
+}
