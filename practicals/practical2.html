@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практична робота №2 – Основи CSS</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <h1 class="site-title">Практична робота №2</h1>
+
+        <nav>
+            <ul>
+                <li><a href="../index.html">Головна</a></li>
+                <li><a href="../about/index.html">Про мене</a></li>
+                <li><a href="index.html">Практичні роботи</a></li>
+                <li><a href="../labs/index.html">Лабораторні заняття</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+<main>
+    <div class="page-container">
+
+        <h2>Стилізація HTML-форми (Практична №2)</h2>
+
+        <!-- СТИЛІЗОВАНА ФОРМА -->
+        <form action="#" class="styled-form">
+
+            <label for="name">Ім’я:</label>
+            <input type="text" id="name" name="first_name" required>
+
+            <label for="surname">Прізвище:</label>
+            <input type="text" id="surname" name="last_name" required>
+
+            <label for="email">Електронна пошта:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm_password">Підтвердження пароля:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+
+            <label for="birthdate">Дата народження:</label>
+            <input type="date" id="birthdate" name="birthdate">
+
+            <label for="gender">Стать:</label>
+            <select id="gender" name="gender">
+                <option value="">Оберіть стать</option>
+                <option value="male">Чоловіча</option>
+                <option value="female">Жіноча</option>
+                <option value="other">Інше</option>
+            </select>
+
+            <input type="submit" value="Надіслати">
+        </form>
+
+    </div>
+</main>
+
+
+<footer>
+    <div class="footer-container">
+        <p>© 2025 Шейко Артем</p>
+
+        <div class="footer-contacts">
+            <span><strong>Телефон:</strong> +380950434320</span>
+            <span><strong>Email:</strong>
+                <a href="mailto:temkiev@gmail.com">temkiev@gmail.com</a>
+            </span>
+            <span><strong>Telegram:</strong>
+                <a href="https://t.me/shk_b" target="_blank">@shk_b</a>
+            </span>
+        </div>
+
+        <p>
+            <a target="_blank" href="https://github.com/shkbb">GitHub профіль</a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
