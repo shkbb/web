@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Планер — Лабораторна робота №4</title>
-  <!-- Custom fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Merriweather:ital,wght@0,300;0,700;1,300&display=swap" rel="stylesheet">
   <style>
     :root{
@@ -32,14 +31,12 @@
     header h1{font-family:Merriweather, serif;margin:0;font-weight:700}
     header .controls{display:flex;gap:10px;align-items:center}
 
-    /* Main grid: sidebar + content */
     .layout{
       display:grid;
       grid-template-columns: 260px 1fr;
       gap:var(--gap);
     }
 
-    /* Sidebar */
     .sidebar{
       background:var(--card); padding:16px; border-radius:var(--radius); box-shadow:var(--shadow);
       display:flex;flex-direction:column;gap:12px;
@@ -52,7 +49,6 @@
     .nav button{background:transparent;border:none;text-align:left;padding:10px;border-radius:8px;cursor:pointer;font-weight:600}
     .nav button:hover{background:#f1f5ff}
 
-    /* Planner content grid: calendar/top + tasks area */
     .content{
       display:grid;grid-template-rows:auto 1fr;gap:var(--gap);
     }
@@ -60,7 +56,6 @@
     .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .date-card{background:var(--card);padding:12px;border-radius:10px;box-shadow:var(--shadow);min-width:180px}
 
-    /* Tasks area uses CSS Grid — responsive by resizing columns */
     .tasks-area{
       display:grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -81,7 +76,6 @@
 
     .add-btn{display:inline-flex;gap:8px;align-items:center;padding:8px 10px;border-radius:8px;border:1px dashed rgba(15,23,36,0.06);cursor:pointer;background:transparent}
 
-    /* simple responsive tweak for smaller screens */
     @media (max-width:920px){
       .layout{grid-template-columns:1fr}
       header{flex-direction:column;align-items:flex-start;gap:10px}
@@ -131,7 +125,6 @@
         </div>
 
         <section class="tasks-area" id="tasks-area">
-          <!-- Example day cards prefilled -->
           <div class="day-card" data-day="Понеділок">
             <header>
               <h3>Понеділок</h3>
@@ -170,7 +163,6 @@
   </div>
 
   <script>
-    // Small JS to satisfy interactivity requirements: checkboxes clickable, inputs editable and adding items
     const todayEl = document.getElementById('today');
     const tasksArea = document.getElementById('tasks-area');
     const doneCount = document.getElementById('done-count');
@@ -189,7 +181,6 @@
     tasksArea.addEventListener('change', e=>{ if(e.target && e.target.type==='checkbox') updateDone(); });
     updateDone();
 
-    // add new day
     document.getElementById('add-day').addEventListener('click', ()=>{
       const name = prompt('Назва дня або розділу','Нова доба');
       if(!name) return;
@@ -200,7 +191,6 @@
       tasksArea.appendChild(card);
     });
 
-    // delegate task addition
     tasksArea.addEventListener('click', e=>{
       if(e.target.closest('.btn-add-inside')){
         const card = e.target.closest('.day-card');
@@ -210,7 +200,6 @@
         const id = 'chk'+Math.random().toString(36).slice(2,9);
         task.innerHTML = `<input type="checkbox" id="${id}"><div class="title"><input value="${title}" /></div>`;
         card.insertBefore(task, e.target);
-        // update header count
         const small = card.querySelector('header .small');
         const count = card.querySelectorAll('.task').length;
         if(small) small.textContent = count + ' завдань';
@@ -218,7 +207,6 @@
       }
     });
 
-    // search filter
     document.getElementById('search').addEventListener('input', e=>{
       const q = e.target.value.toLowerCase();
       document.querySelectorAll('.task').forEach(t=>{
